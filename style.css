@@ -37,17 +37,44 @@ body {
     background-repeat: no-repeat;
 }
 
-.weather-forecast {
+#weather-forecast {
     background-color:darkturquoise;
     border-radius: 25px;
     padding: 20px;
     margin: 0 auto;
     width: 80%;
-    height: 300px;
+    height: 500px;
     text-align: center;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    justify-content: center;
+    
+}
+
+.weather-card {
+    background-color: azure;
+    border-radius: 10px;
+    margin: 2.5%;
+    width: 20%;
+    height: 200px;
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    align-items: center;
+}
+
+.weather-icon {
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+.temp {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 

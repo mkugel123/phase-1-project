@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', ()=>{
     const button = document.getElementById('search')
-    
+    let forecast = document.querySelector('#weather-forecast')
+    console.log(forecast)
     let longitude
     let latitude
     //weatherImg is used as icon and changes depending on weather
@@ -11,37 +12,43 @@ document.addEventListener('DOMContentLoaded', ()=>{
         return num * 1.8 + 32
     }
 
+    const removeAllChildren = function(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+
     
     const determineIcon = function(day) {
         const daysWeather = day.weather
         if (daysWeather === 'cloudy'){
             weatherImg = 'src/cloudy.jpg'
         } else if (daysWeather === 'clear'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/clear.png'
         } else if (daysWeather === 'pcloudy'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/partly-cloudy.png'
         } else if (daysWeather === 'mcloudy'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/mostly-cloudy.png'
         } else if (daysWeather === 'humid'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/humid.jpg'
         } else if (daysWeather === 'lightrain'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/light-rain.png'
         } else if (daysWeather === 'oshower'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/ishower.jpg'
         } else if (daysWeather === 'ishower'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/oshower.png'
         } else if (daysWeather === 'lightsnow'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/light-snow.png'
         } else if (daysWeather === 'rain'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/rain.jpg'
         } else if (daysWeather === 'snow'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/snowing.png'
         } else if (daysWeather === 'rainsnow'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/rain-snow.png'
         } else if (daysWeather === 'ts'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/thunderstorm.png'
         } else if (daysWeather === 'tsrain'){
-            weatherImg = 'src/cloudy.jpg'
+            weatherImg = 'src/thunderstorm-rain.png'
         }
         
     }
@@ -57,19 +64,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
         date.className = 'date'
         date.innerText = `${month}/${dayOfMonth}`
         const weatherIcon = document.createElement('img')
-        weatherIcon.className = 'weatherIcon'
+        weatherIcon.className = 'weather-icon'
         weatherIcon.src = weatherImg
-        const temp = document.createElement('ul')
-        temp.className = 'temp'
-        const high = document.createElement('li')
+        const high = document.createElement('p')
         high.innerText = `High: ${maxTemp}`   
-        const low = document.createElement('li')
+        const low = document.createElement('p')
         low.innerText = `Low: ${minTemp}`
-        temp.appendChild(low)
-        temp.appendChild(high)
+  
         div.appendChild(date)
-        div.appendChild(weatherIcon)
-        div.appendChild(temp)
+        div.appendChild(weatherIcon)    
+        div.appendChild(low)
+        div.appendChild(high)
+
+        forecast.appendChild(div)
         
        
         console.log(div)
@@ -90,6 +97,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
     
     const fetchCoordinates = function(e){
+        removeAllChildren(forecast)
         e.preventDefault()
         const country = document.querySelector('#country').value
         const zip = document.querySelector('#zip').value
