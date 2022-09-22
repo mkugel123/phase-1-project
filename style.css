@@ -21,20 +21,30 @@ body {
 }
 
 .search-div input {
-    width: 40%;
+    width: 60%;
     height: 65px;
     font-size: 30px;
     vertical-align: middle;
+    border-radius: 10px;
 }
 
 .search-div button {
-    width: 7%;
+    width: 15%;
     height: 70px;
     vertical-align: middle;
     background-image: url(src/search-icon.png);
     background-size: contain;
     background-position: 0%;
     background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
+.search-div select {
+    width: 12%;
+    height: 70px;
+    vertical-align: middle;
+    font-size: 30px;
+    border-radius: 10px;
 }
 
 #weather-forecast {
@@ -66,17 +76,19 @@ body {
 
 .weather-icon {
     margin-top: 10px;
+    margin-bottom: 10px;
     height: 40px;
     border-radius: 10px;
     vertical-align: middle;
 }
 
-.temp {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+h2 {
+    position: absolute;
+    top: 5px;
+    
 }
 
-
+.temp {
+    margin-top: 3px;
+}
 
