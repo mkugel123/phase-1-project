@@ -1,21 +1,17 @@
 document.addEventListener('DOMContentLoaded', ()=>{
     const button = document.getElementById('search')
     const forecast = document.querySelector('#weather-forecast')
-    const unit = document.getElementById('unit').value
+    const location = document.querySelector('.location')
+
     let longitude
     let latitude
-    //weatherImg is used as icon and changes depending on weather
-    //value of each day object
+
+
     let weatherImg
 
-    // button.addEventListener('click', fetchCoordinates)
 
     const celciusToFarenheit = function(num){
-        if(unit === 'celcius'){
-            return num
-        } else{
         return num * 1.8 + 32
-        }
     }
 
     const removeAllChildren = function(parent) {
@@ -61,8 +57,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     const addPlaceName = function(city, state){
         const h2 = document.createElement('h2');
+        h2.className = 'city'
         h2.innerText = `${city}, ${state}`
-        forecast.appendChild(h2)
+        location.appendChild(h2)
     }
     
     const renderDaysWeather = function(day){
@@ -70,7 +67,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const dayOfMonth = day.date.toString().slice(6)
         const month = day.date.toString().slice(4, 6)
         const date = new Date(`${year}-${month}-${dayOfMonth}`).toString().split(' ').slice(0, 3).join(' ');
-        const minTemp = Math.round(celciusToFarenheit(day.temp2m.min)) 
+        let minTemp = Math.round(celciusToFarenheit(day.temp2m.min)) 
         const maxTemp = Math.round(celciusToFarenheit(day.temp2m.max))
         const div = document.createElement('div')
         div.className = 'weather-card'
@@ -101,7 +98,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         fetch(`http://www.7timer.info/bin/api.pl?lon=${longitude}&lat=${latitude}&product=civillight&unit=imperial&output=json`)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             const weekForecast = data.dataseries
             weekForecast.forEach(day =>{
                 determineIcon(day)
@@ -114,19 +110,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
         removeAllChildren(forecast)
         e.preventDefault()
         const zip = document.querySelector('#zip').value
-        if (zip === ""){
-            alert('Please enter valid country and zip')
+        if (zip.length !== 5){
+            alert('Please enter valid zip')
         }
             fetch(`https://api.zippopotam.us/us/${zip}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 longitude = data.places[0].longitude
                 latitude = data.places[0].latitude
                 addPlaceName(data.places[0]['place name'], data.places[0]['state abbreviation'])
                 fetchWeather()
             })
-        
     }
 
 

@@ -21,7 +21,7 @@ body {
 }
 
 .search-div input {
-    width: 60%;
+    width: 80%;
     height: 65px;
     font-size: 30px;
     vertical-align: middle;
@@ -45,6 +45,21 @@ body {
     vertical-align: middle;
     font-size: 30px;
     border-radius: 10px;
+}
+
+.location {
+    background-color:coral;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 0 auto;
+    width: 80%;
+    height: 75px;
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 #weather-forecast {
@@ -82,9 +97,9 @@ body {
     vertical-align: middle;
 }
 
-h2 {
-    position: absolute;
-    top: 5px;
+.city {
+position: absolute;
+
     
 }
 
