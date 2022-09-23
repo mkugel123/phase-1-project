@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
     const addPlaceName = function(city, state){
+        removeAllChildren(location)
         const h2 = document.createElement('h2');
         h2.className = 'city'
         h2.innerText = `${city}, ${state}`
@@ -66,7 +67,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const year = day.date.toString().slice(0, 4)
         const dayOfMonth = day.date.toString().slice(6)
         const month = day.date.toString().slice(4, 6)
-        const date = new Date(`${year}-${month}-${dayOfMonth}`).toString().split(' ').slice(0, 3).join(' ');
+        const date = new Date(`${year}-${month}-${dayOfMonth}`).toDateString()
+        console.log(date)
+        console.log(year)
+        console.log(dayOfMonth)
+        console.log(month)
         let minTemp = Math.round(celciusToFarenheit(day.temp2m.min)) 
         const maxTemp = Math.round(celciusToFarenheit(day.temp2m.max))
         const div = document.createElement('div')
@@ -98,6 +103,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         fetch(`http://www.7timer.info/bin/api.pl?lon=${longitude}&lat=${latitude}&product=civillight&unit=imperial&output=json`)
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             const weekForecast = data.dataseries
             weekForecast.forEach(day =>{
                 determineIcon(day)
