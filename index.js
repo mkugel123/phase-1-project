@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const button = document.getElementById('search')
     const forecast = document.querySelector('#weather-forecast')
     const location = document.querySelector('.location')
+    const unit = document.querySelector('#units')
+    console.log(unit.value)
 
     let longitude
     let latitude
@@ -10,8 +12,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let weatherImg
 
 
-    const celciusToFarenheit = function(num){
-        return num * 1.8 + 32
+    const celciusOrFarenheit = function(num){
+        if (unit.value === 'fahrenheit'){
+            return num * 1.8 + 32
+        } else if (unit.value === 'celcius'){
+            return num
+        }
     }
 
     const removeAllChildren = function(parent) {
@@ -67,13 +73,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const year = day.date.toString().slice(0, 4)
         const dayOfMonth = day.date.toString().slice(6)
         const month = day.date.toString().slice(4, 6)
-        const date = new Date(`${year}-${month}-${dayOfMonth}`).toDateString()
-        console.log(date)
-        console.log(year)
-        console.log(dayOfMonth)
-        console.log(month)
-        let minTemp = Math.round(celciusToFarenheit(day.temp2m.min)) 
-        const maxTemp = Math.round(celciusToFarenheit(day.temp2m.max))
+        const date = new Date(`${year}-${month}-${dayOfMonth}`).toDateString().split(' ').slice(0, 3).join(' ')
+        const minTemp = Math.round(celciusOrFarenheit(day.temp2m.min)) 
+        const maxTemp = Math.round(celciusOrFarenheit(day.temp2m.max))
         const div = document.createElement('div')
         div.className = 'weather-card'
         const dateP = document.createElement('p')
@@ -84,10 +86,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
         weatherIcon.src = weatherImg
         const high = document.createElement('p')
         high.className = 'temp'
-        high.innerText = `High: ${maxTemp}`   
+        high.innerText = `High: ${maxTemp}°`   
         const low = document.createElement('p')
         low.className = 'temp'
-        low.innerText = `Low: ${minTemp}`
+        low.innerText = `Low: ${minTemp}°`
   
         div.appendChild(dateP)
         div.appendChild(weatherIcon)    
@@ -133,5 +135,5 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 
     button.addEventListener('click', fetchCoordinates)
-
+    unit.addEventListener('change', fetchCoordinates)
 })
