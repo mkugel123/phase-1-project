@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', ()=>{
     const button = document.getElementById('search')
-    const forecast = document.querySelector('#weather-forecast')
+    const searchDiv = document.querySelector('.search-div')
+    const forecast = document.querySelector('.weather-forecast')
     const location = document.querySelector('.location')
     const unit = document.querySelector('#units')
-    console.log(unit.value)
 
     let longitude
     let latitude
+    let dark = false
 
 
     let weatherImg
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const addPlaceName = function(city, state){
         removeAllChildren(location)
         const h2 = document.createElement('h2');
-        h2.className = 'city'
+        h2.id = 'city'
         h2.innerText = `${city}, ${state}`
         location.appendChild(h2)
     }
@@ -78,6 +79,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const maxTemp = Math.round(celciusOrFarenheit(day.temp2m.max))
         const div = document.createElement('div')
         div.className = 'weather-card'
+        if(dark === true){
+            div.classList.add('dark')
+        }
         const dateP = document.createElement('p')
         dateP.className = 'date'
         dateP.innerText = date
@@ -131,9 +135,37 @@ document.addEventListener('DOMContentLoaded', ()=>{
             })
     }
 
+    const toggleDarkMode = function(){
+        const weatherCards = document.querySelectorAll('.weather-card')
+        if(dark === true){
+            document.body.classList.add('dark')
+            searchDiv.classList.add('dark')
+            location.classList.add('dark')
+            forecast.classList.add('dark')
+            weatherCards.forEach((card) => {
+                card.classList.add('dark')
+            })
+
+        } else if(dark === false){
+            document.body.classList.remove('dark')
+            searchDiv.classList.remove('dark')
+            location.classList.remove('dark')
+            forecast.classList.remove('dark')
+            weatherCards.forEach((card) => {
+                card.classList.remove('dark')
+            })
+        }
+    }
+
 
 
 
     button.addEventListener('click', fetchCoordinates)
     unit.addEventListener('change', fetchCoordinates)
+    document.addEventListener('keydown', (e) => {
+        if(e.key === 'D'){
+            dark = !dark
+            toggleDarkMode()
+        }
+    })
 })
