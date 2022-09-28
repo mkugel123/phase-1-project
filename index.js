@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const year = day.date.toString().slice(0, 4)
         const dayOfMonth = day.date.toString().slice(6)
         const month = day.date.toString().slice(4, 6)
-        const date = new Date(`${year}-${month}-${dayOfMonth}`).toDateString().split(' ').slice(0, 3).join(' ')
+        const date = new Date(`${month}-${dayOfMonth}-${year}`).toDateString().split(' ').slice(0, 3).join(' ')
         const minTemp = Math.round(celciusOrFarenheit(day.temp2m.min)) 
         const maxTemp = Math.round(celciusOrFarenheit(day.temp2m.max))
         const div = document.createElement('div')
@@ -122,16 +122,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
         removeAllChildren(forecast)
         e.preventDefault()
         const zip = document.querySelector('#zip').value
-        if (zip.length !== 5){
-            alert('Please enter valid zip')
-        }
             fetch(`https://api.zippopotam.us/us/${zip}`)
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 longitude = data.places[0].longitude
                 latitude = data.places[0].latitude
                 addPlaceName(data.places[0]['place name'], data.places[0]['state abbreviation'])
                 fetchWeather()
+            })
+            .catch(()=>{
+                alert('invalid zip')
+                return false
             })
     }
 
@@ -157,9 +159,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
-
-
-
     button.addEventListener('click', fetchCoordinates)
     unit.addEventListener('change', fetchCoordinates)
     document.addEventListener('keydown', (e) => {
@@ -168,4 +167,5 @@ document.addEventListener('DOMContentLoaded', ()=>{
             toggleDarkMode()
         }
     })
+
 })
