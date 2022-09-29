@@ -6,6 +6,7 @@ body {
     text-align: center;
 }
 
+
 body.dark {
     background-color: darkgray;
     color: white

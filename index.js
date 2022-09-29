@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         fetch(`http://www.7timer.info/bin/api.pl?lon=${longitude}&lat=${latitude}&product=civillight&unit=imperial&output=json`)
         .then(res => res.json())
         .then(data => {
+            removeAllChildren(forecast)
             console.log(data)
             const weekForecast = data.dataseries
             weekForecast.forEach(day =>{
@@ -119,6 +120,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
     
     const fetchCoordinates = function(e){
+        removeAllChildren(location)
         removeAllChildren(forecast)
         e.preventDefault()
         const zip = document.querySelector('#zip').value
@@ -132,9 +134,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 fetchWeather()
             })
             .catch(()=>{
-                alert('invalid zip')
+                alert('error')
+                removeAllChildren(forecast)
                 return false
             })
+        const img = document.createElement('img')
+        img.src = 'src/gears.gif'
+        forecast.append(img)
     }
 
     const toggleDarkMode = function(){
