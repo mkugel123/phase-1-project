@@ -21,7 +21,13 @@ Once you have the app open in the browser you will see this:
 
 ![Input Bar](src/input.png)
 
-In the input bar, type in any valid US zip code and watch the magic happen before your eyes.
+In the input bar, type in any valid US zip code and press the search button.
+
+You can choose whether (pun intended) you would like to see the results in celcius or fahrenheit.
+
+Watch the magic happen before your eyes.
+
+
 
 If you're up for a little challenge go ahead and solve the dark mode riddle at the bottom of the page.
 
