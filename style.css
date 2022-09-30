@@ -6,7 +6,6 @@ body {
     text-align: center;
 }
 
-
 body.dark {
     background-color: darkgray;
     color: white
@@ -123,5 +122,11 @@ body.dark {
 
 .temp {
     margin-top: 3px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
