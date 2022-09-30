@@ -4,7 +4,7 @@ Weekly Weather Forecast is a simple weather app. When a user inputs a valid US z
 
 ## Installation
 
-Got to [This Link](https://github.com/mkugel123/phase-1-project) and hit the code button. 
+Go to [This Link](https://github.com/mkugel123/phase-1-project) and hit the code button. 
 Make sure SSH is selected and copy the given link.
 
 Then, in your terminal navigate to the directory in which you would like to save this file and type:
