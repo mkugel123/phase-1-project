@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
    
     const fetchWeather = function() {
+        unit.addEventListener('change', fetchCoordinates)
         fetch(`http://www.7timer.info/bin/api.pl?lon=${longitude}&lat=${latitude}&product=civillight&unit=imperial&output=json`)
         .then(res => res.json())
         .then(data => {
@@ -166,7 +167,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
     button.addEventListener('click', fetchCoordinates)
-    unit.addEventListener('change', fetchCoordinates)
+    
     document.addEventListener('keydown', (e) => {
         if(e.key === 'D'){
             dark = !dark
